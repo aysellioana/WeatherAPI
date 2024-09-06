@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast for {{ city }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesW.css') }}">
+</head>
+
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="{{ url_for('static', filename='images/sky.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="forecast-container">
+        <h1>3-Day Weather Forecast for {{ city }}</h1>
+        <div class="forecast-cards">
+            {% for day in forecast %}
+            <div class="forecast-card">
+                <h2>{{ day.date }}</h2>
+                <p><strong>Max Temp:</strong> {{ day.day.maxtemp_c }}°C</p>
+                <p><strong>Min Temp:</strong> {{ day.day.mintemp_c }}°C</p>
+                <p><strong>Precipitation:</strong> {{ day.day.totalprecip_mm }} mm</p>
+                <p><strong>Sunrise:</strong> {{ day.astro.sunrise }}</p>
+                <p><strong>Sunset:</strong> {{ day.astro.sunset }}</p>
+            </div>
+            {% endfor %}
+            <a href="/" class="back-button">Check Another City</a>
+        </div>
+    </div>
+</body>
+
+</html>
